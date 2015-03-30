@@ -69,3 +69,27 @@ class PolynomialSolver:
 			return(lower)
 		else:
 			return None
+			
+		
+	 def Plot_solver(self,n,L):
+        	lower=int(input("Input the lower bound of interval in which root lies :"))
+        	upper=int(input("Input the upper bound of interval in which root lies :"))
+        	x=linspace(lower-1,upper+1,60)
+        	it=int(input("Input the maximum number of itertions :"))
+        	plt.axis([lower-1,upper+1,func(n,L,lower-1)+1,func(n,L,upper+1)+1])
+        	plt.plot((lower-1,upper+1),(0,0),'g-')
+        	plt.plot(x,func(n,L,x),'r')
+        	plt.plot(lower,func(n,L,lower),'ro')
+        	plt.plot(upper,func(n,L,upper),'go')
+        	while(abs(func(n,L,lower)-func(n,L,upper))>0.00001 and it>0):
+             		m=(float(lower)+upper)/2    
+             		if(func(n,L,lower)*func(n,L,m)<0):
+                		 upper=m
+             		else:
+                 		 lower=m
+             		it-=1
+             		plt.plot(lower,func(n,L,lower),'ro')
+             		plt.plot(upper,func(n,L,upper),'go')
+        	plt.plot(lower,func(n,L,lower),'bo')
+        	print(lower,upper)	
+	
